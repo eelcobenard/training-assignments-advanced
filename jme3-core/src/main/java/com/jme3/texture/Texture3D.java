@@ -207,21 +207,21 @@ public class Texture3D extends AbstractTexture3D {
         return super.equals(other);
     }
 
-    @Override
-    public void write(JmeExporter e) throws IOException {
-        super.write(e);
-        OutputCapsule capsule = e.getCapsule(this);
-        capsule.write(super.getWrapS(), "wrapS", WrapMode.EdgeClamp);
-        capsule.write(super.getWrapT(), "wrapT", WrapMode.EdgeClamp);
-        capsule.write(super.getWrapR(), "wrapR", WrapMode.EdgeClamp);
-    }
-
-    @Override
-    public void read(JmeImporter e) throws IOException {
-        super.read(e);
-        InputCapsule capsule = e.getCapsule(this);
-        super.setWrapS(capsule.readEnum("wrapS", WrapMode.class, WrapMode.EdgeClamp));
-        super.setWrapT(capsule.readEnum("wrapT", WrapMode.class, WrapMode.EdgeClamp));
-        super.setWrapR(capsule.readEnum("wrapR", WrapMode.class, WrapMode.EdgeClamp));
-    }
+//    @Override
+//    public void write(JmeExporter e) throws IOException {
+//        super.write(e);
+//        OutputCapsule capsule = e.getCapsule(this);
+//        capsule.write(super.getWrapS(), "wrapS", WrapMode.EdgeClamp);
+//        capsule.write(super.getWrapT(), "wrapT", WrapMode.EdgeClamp);
+//        capsule.write(super.getWrapR(), "wrapR", WrapMode.EdgeClamp);
+//    }
+//
+//    @Override
+//    public void read(JmeImporter e) throws IOException {
+//        super.read(e);
+//        InputCapsule capsule = e.getCapsule(this);
+//        super.setWrapS(capsule.readEnum("wrapS", WrapMode.class, WrapMode.EdgeClamp));
+//        super.setWrapT(capsule.readEnum("wrapT", WrapMode.class, WrapMode.EdgeClamp));
+//        super.setWrapR(capsule.readEnum("wrapR", WrapMode.class, WrapMode.EdgeClamp));
+//    }
 }
