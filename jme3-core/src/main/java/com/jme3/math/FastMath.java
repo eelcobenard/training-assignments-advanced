@@ -734,23 +734,58 @@ final public class FastMath {
     /**
      * Returns the determinant of a 4x4 matrix.
      */
-    public static float determinant(double m00, double m01, double m02,
-            double m03, double m10, double m11, double m12, double m13,
-            double m20, double m21, double m22, double m23, double m30,
-            double m31, double m32, double m33) {
+    public static float determinant(double[][] matrix) throws IllegalArgumentException{
 
-        double det01 = m20 * m31 - m21 * m30;
-        double det02 = m20 * m32 - m22 * m30;
-        double det03 = m20 * m33 - m23 * m30;
-        double det12 = m21 * m32 - m22 * m31;
-        double det13 = m21 * m33 - m23 * m31;
-        double det23 = m22 * m33 - m23 * m32;
-        return (float) (m00 * (m11 * det23 - m12 * det13 + m13 * det12) - m01
-                * (m10 * det23 - m12 * det03 + m13 * det02) + m02
-                * (m10 * det13 - m11 * det03 + m13 * det01) - m03
-                * (m10 * det12 - m11 * det02 + m12 * det01));
+    	if(!is4by4(matrix)) {
+    		throw new IllegalArgumentException("Matrix not 4x4");
+    	}
+    	
+        double det01 = matrix[2][0] * matrix[3][1] - matrix[2][1] * matrix[3][0];
+        double det02 = matrix[2][0] * matrix[3][2] - matrix[2][2] * matrix[3][0];
+        double det03 = matrix[2][0] * matrix[3][3] - matrix[2][3] * matrix[3][0];
+        double det12 = matrix[2][1] * matrix[3][2] - matrix[2][2] * matrix[3][1];
+        double det13 = matrix[2][1] * matrix[3][3] - matrix[2][3] * matrix[3][1];
+        double det23 = matrix[2][2] * matrix[3][3] - matrix[2][3] * matrix[3][2];
+        return (float) (matrix[0][0] * (matrix[1][1] * det23 - matrix[1][2]
+        		* det13 + matrix[1][3] * det12) - matrix[0][1] * (matrix[1][0] *
+        		det23 - matrix[1][2] * det03 + matrix[1][3] * det02) + matrix[0][2]
+                * (matrix[1][0] * det13 - matrix[1][1] * det03 + matrix[1][3] * det01)
+                - matrix[0][3] * (matrix[1][0] * det12 - matrix[1][1] * det02
+                + matrix[1][2] * det01));
+    }
+    
+    /**
+     * Returns true if a multidimensional array is of size 4x4
+     */
+    private static boolean is4by4(double[][] matrix) {
+    	for(double[] row : matrix) {
+    		if(row.length != 4) {
+    			return false;
+    		}
+    	}
+    	return matrix.length == 4;
     }
 
+//    /**
+//     * Returns the determinant of a 4x4 matrix.
+//     */
+//    public static float determinant(double m00, double m01, double m02,
+//            double m03, double m10, double m11, double m12, double m13,
+//            double m20, double m21, double m22, double m23, double m30,
+//            double m31, double m32, double m33) {
+//
+//        double det01 = m20 * m31 - m21 * m30;
+//        double det02 = m20 * m32 - m22 * m30;
+//        double det03 = m20 * m33 - m23 * m30;
+//        double det12 = m21 * m32 - m22 * m31;
+//        double det13 = m21 * m33 - m23 * m31;
+//        double det23 = m22 * m33 - m23 * m32;
+//        return (float) (m00 * (m11 * det23 - m12 * det13 + m13 * det12) - m01
+//                * (m10 * det23 - m12 * det03 + m13 * det02) + m02
+//                * (m10 * det13 - m11 * det03 + m13 * det01) - m03
+//                * (m10 * det12 - m11 * det02 + m12 * det01));
+//    }
+    
     /**
      * Returns a random float between 0 and 1.
      * 
